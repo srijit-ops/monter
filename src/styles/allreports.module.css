@@ -1,0 +1,15 @@
+.img_container div {
+    position: unset !important;
+  }
+
+  .img {
+    width: 45% !important;
+    position: relative !important;
+    height: unset !important;
+  }
+
+  .download{
+    width: 25px !important;
+    position: relative !important;
+    height: unset !important;
+  }

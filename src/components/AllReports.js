@@ -8,6 +8,7 @@ import Pagination from './Pagination';
 function AllReports({data}) {
   const [selectedOption, setSelectedOption] = useState({value:5, label:5});
   const [PageSize, setPageSize] = useState(selectedOption?selectedOption.value:6)
+  
     const rowOptions = [
       {
         value: 4,
@@ -38,7 +39,8 @@ function AllReports({data}) {
           label: 10
         },
       ];
-    // let PageSize = 10;
+
+    const totalPageCount = Math.ceil( data.length/ PageSize);
       const [currentPage, setCurrentPage] = useState(1);
       useEffect(() => {
         console.log(selectedOption)
@@ -71,28 +73,16 @@ function AllReports({data}) {
         </div>
         <TableComponent finalData={finalData}/>
         <div className='flex justify-between items-center mt-8 flex-wrap'>
-        {/* <Pagination
-        // className="pagination-bar"
-        currentPage={currentPage}
-        totalCount={data.length}
-        pageSize={PageSize}
-        onPageChange={page => setCurrentPage(page)}
-      /> */}
       <div className='md:w-3/5 w-full'>
       <Pagination
-        // className="pagination-bar"
         currentPage={currentPage}
-        totalCount={data.length}
+        totalPageCount = {totalPageCount}
+        // totalCount={data.length}
         pageSize={PageSize}
         onPageChange={page => setCurrentPage(page)}
       />
       </div>
-      
-      {/* <Select options={rowOptions} onChange={(value) => {
-        this.setValues(value)
-        console.log("haha")
-    }} 
-        multi={false}/>; */}
+    
         <div className='flex justify-center items-center md:w-1/3 w-full'>
         <p className='text-gray-600 mr-4 text-[0.9rem]'>Rows per page</p>
         <Select
@@ -103,18 +93,6 @@ function AllReports({data}) {
       {/* {console.log(selectedOption)} */}
         </div>
       </div>
-      
-        
-        
-        {/* <Select
-            menuPortalTarget={document.body}
-            menuPosition="fixed"
-            options={[
-              { value: 'chocolate', label: 'Chocolate' },
-              { value: 'strawberry', label: 'Strawberry' },
-              { value: 'vanilla', label: 'Vanilla' },
-            ]}
-          /> */}
         </div>
 
   )

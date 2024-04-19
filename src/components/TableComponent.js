@@ -36,10 +36,10 @@ function TableComponent({finalData}) {
           </tr>
         </thead>
         <tbody className='border-t-[16px] border-transparent'>
-          {finalData.map(item => {
+          {finalData.map((item,index) => {
             const {date, time}= formatDate(item.createdAt)
             return (
-              <tr>
+              <tr key={index}>
                 <td>
                     {date}
                     <br/>

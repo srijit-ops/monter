@@ -52,13 +52,14 @@ const Pagination = ({onPageChange,
           </div>
 
       </li>
-      {paginationRange.map((pageNumber) => {
+      {paginationRange.map((pageNumber, index) => {
         if (pageNumber === DOTS) {
-          return <li className="font-semibold text-lg text-gray-800 ">&#8230;</li>;
+          return <li className="font-semibold text-lg text-gray-800 " key={index}>&#8230;</li>;
         }
 
         return (
           <li
+          key={index}
             className={`cursor-pointer px-3 py-2 rounded-md border border-gray-400  text-center text-[0.9rem] font-semibold  ${pageNumber===currentPage?"bg-[#f4511e] text-white":"text-gray-500 bg-white"}`}
             onClick={() => onPageChange(pageNumber)}
           >

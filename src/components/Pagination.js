@@ -1,7 +1,9 @@
 import React from "react";
 // import classnames from "classnames";
 import { usePagination, DOTS } from "../hooks/usePagination.hooks";
+import Styles from "../styles/pagination.module.css"
 // import "./pagination.scss";
+import Image from "next/image";
 const Pagination = (props) => {
   const {
     onPageChange,
@@ -35,6 +37,7 @@ const Pagination = (props) => {
   return (
     <ul
       // className={classnames("pagination-container", { [className]: className })}
+      className="flex justify-between items-center gap-3"
     >
       <li
         // className={classnames("pagination-item", {
@@ -42,11 +45,22 @@ const Pagination = (props) => {
         // })}
         onClick={onPrevious}
       >
-        <div>prev</div>
+        <div className="flex justify-center items-center gap-3">
+          
+          <Image
+            src={"/back.png"}
+            alt={"filter"}
+            layout="fill"
+            // height={230}
+            // width={238}
+            className={`object-contain ${Styles.img}`}/>
+            <p>Prev</p>
+          </div>
+
       </li>
       {paginationRange.map((pageNumber) => {
         if (pageNumber === DOTS) {
-          return <li className="pagination-item dots">&#8230;</li>;
+          return <li className="font-semibold text-lg text-gray-800">&#8230;</li>;
         }
 
         return (
@@ -54,6 +68,7 @@ const Pagination = (props) => {
             // className={classnames("pagination-item", {
             //   selected: pageNumber === currentPage
             // })}
+            className="cursor-pointer px-3 py-2 rounded-md text-gray-500 border border-gray-400  text-center text-[0.9rem] font-semibold focus:bg-[#f4511e] focus:text-white"
             onClick={() => onPageChange(pageNumber)}
           >
             {pageNumber}
@@ -66,7 +81,16 @@ const Pagination = (props) => {
         // })}
         onClick={onNext}
       >
-        <div>next</div>
+        <div className="flex justify-center items-center gap-3">
+          <p>Next</p>
+          <Image
+            src={"/back.png"}
+            alt={"filter"}
+            layout="fill"
+            // height={230}
+            // width={238}
+            className={`object-contain rotate-180 ${Styles.img}`}/>
+          </div>
       </li>
     </ul>
   );

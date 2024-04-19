@@ -67,3 +67,12 @@
       }
     }
   }
+  .img_container div {
+    position: unset !important;
+  }
+
+  .img {
+    width: 10% !important;
+    position: relative !important;
+    height: unset !important;
+  }

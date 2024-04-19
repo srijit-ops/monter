@@ -70,7 +70,7 @@ function AllReports({data}) {
             </button>
         </div>
         <TableComponent finalData={finalData}/>
-        <div className='flex justify-between items-center mt-8'>
+        <div className='flex justify-between items-center mt-8 flex-wrap'>
         {/* <Pagination
         // className="pagination-bar"
         currentPage={currentPage}
@@ -78,7 +78,7 @@ function AllReports({data}) {
         pageSize={PageSize}
         onPageChange={page => setCurrentPage(page)}
       /> */}
-
+      <div className='md:w-3/5 w-full'>
       <Pagination
         // className="pagination-bar"
         currentPage={currentPage}
@@ -86,13 +86,15 @@ function AllReports({data}) {
         pageSize={PageSize}
         onPageChange={page => setCurrentPage(page)}
       />
+      </div>
+      
       {/* <Select options={rowOptions} onChange={(value) => {
         this.setValues(value)
         console.log("haha")
     }} 
         multi={false}/>; */}
-        <div className='flex justify-center items-center'>
-        <p className='text-gray-600 mr-4'>Rows per page</p>
+        <div className='flex justify-center items-center md:w-1/3 w-full'>
+        <p className='text-gray-600 mr-4 text-[0.9rem]'>Rows per page</p>
         <Select
         defaultValue={selectedOption}
         onChange={setSelectedOption}

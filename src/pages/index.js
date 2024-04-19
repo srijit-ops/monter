@@ -4,7 +4,7 @@ import { Modal } from "react-responsive-modal";
 import { useState } from "react";
 import Head from "next/head";
 import AllReports from "@/components/AllReports";
-import Select from "react-select";
+
 
 export default function Home({data}) {
   const [open, setOpen] = useState(false);
@@ -28,25 +28,6 @@ export default function Home({data}) {
       </Head>
       <main className={`pb-8  bg-white relative flex justify-center items-center w-full h-screen`}>
         <button className="px-4 py-2 text-white tracking-wider bg-black rounded-lg" onClick={onOpenModal}>See reports</button>
-        <Select
-        defaultValue={selectedOption}
-        onChange={setSelectedOption}
-        options={[
-          { value: 'chocolate', label: 'Chocolate' },
-          { value: 'strawberry', label: 'Strawberry' },
-          { value: 'vanilla', label: 'Vanilla' },
-        ]}
-      />
-        
-        {/* <ReactSelect
-            menuPortalTarget={document.body}
-            menuPosition="fixed"
-            options={[
-              { value: 'chocolate', label: 'Chocolate' },
-              { value: 'strawberry', label: 'Strawberry' },
-              { value: 'vanilla', label: 'Vanilla' },
-            ]}
-          /> */}
         <Modal
           open={open}
           onClose={onCloseModal}

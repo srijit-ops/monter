@@ -43,6 +43,7 @@ const Pagination = (props) => {
         // className={classnames("pagination-item", {
         //   disabled: currentPage === 1
         // })}
+        className={`${currentPage===1?"text-gray-400 cursor-default":"text-black cursor-pointer"}`}
         onClick={onPrevious}
       >
         <div className="flex justify-center items-center gap-3">
@@ -54,13 +55,13 @@ const Pagination = (props) => {
             // height={230}
             // width={238}
             className={`object-contain ${Styles.img}`}/>
-            <p>Prev</p>
+            <p className="text-[0.9rem]">Prev</p>
           </div>
 
       </li>
       {paginationRange.map((pageNumber) => {
         if (pageNumber === DOTS) {
-          return <li className="font-semibold text-lg text-gray-800">&#8230;</li>;
+          return <li className="font-semibold text-lg text-gray-800 ">&#8230;</li>;
         }
 
         return (
@@ -68,7 +69,7 @@ const Pagination = (props) => {
             // className={classnames("pagination-item", {
             //   selected: pageNumber === currentPage
             // })}
-            className="cursor-pointer px-3 py-2 rounded-md text-gray-500 border border-gray-400  text-center text-[0.9rem] font-semibold focus:bg-[#f4511e] focus:text-white"
+            className={`cursor-pointer px-3 py-2 rounded-md border border-gray-400  text-center text-[0.9rem] font-semibold  ${pageNumber===currentPage?"bg-[#f4511e] text-white":"text-gray-500 bg-white"}`}
             onClick={() => onPageChange(pageNumber)}
           >
             {pageNumber}
@@ -80,9 +81,10 @@ const Pagination = (props) => {
         //   disabled: currentPage === lastPage
         // })}
         onClick={onNext}
+        className={`${currentPage===lastPage?"text-gray-400 cursor-default":"text-black cursor-pointer"}`}
       >
         <div className="flex justify-center items-center gap-3">
-          <p>Next</p>
+          <p className="text-[0.9rem]">Next</p>
           <Image
             src={"/back.png"}
             alt={"filter"}

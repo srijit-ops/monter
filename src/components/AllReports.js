@@ -2,7 +2,8 @@ import React, { useMemo, useState } from 'react'
 import Image from "next/image";
 import Styles from "../styles/allreports.module.css"
 import TableComponent from './TableComponent';
-import Select from "react-dropdown-select";
+import Select from "react-select";
+import Pagination from './Pagination';
 
 function AllReports({data}) {
 
@@ -16,7 +17,7 @@ function AllReports({data}) {
           label: 10
         }
       ];
-    let PageSize = 10;
+    let PageSize = 6;
       const [currentPage, setCurrentPage] = useState(1);
     
       const finalData = useMemo(() => {
@@ -45,17 +46,50 @@ function AllReports({data}) {
         <TableComponent finalData={finalData}/>
         <div className='flex justify-between items-center'>
         {/* <Pagination
-        className="pagination-bar"
+        // className="pagination-bar"
         currentPage={currentPage}
         totalCount={data.length}
         pageSize={PageSize}
         onPageChange={page => setCurrentPage(page)}
       /> */}
-      <Select options={rowOptions} onChange={(value) => {
+      <Pagination
+        // className="pagination-bar"
+        currentPage={currentPage}
+        totalCount={data.length}
+        pageSize={PageSize}
+        onPageChange={page => setCurrentPage(page)}
+      />
+      {/* <Select options={rowOptions} onChange={(value) => {
         this.setValues(value)
         console.log("haha")
     }} 
-        multi={false}/>;
+        multi={false}/>; */}
+        <Select
+        // className="basic-single"
+        // classNamePrefix="select"
+        // defaultValue={colourOptions[0]}
+        // isDisabled={isDisabled}
+        // isLoading={isLoading}
+        // isClearable={isClearable}
+        // isRtl={isRtl}
+        // isSearchable={isSearchable}
+        name="color"
+        menuPortalTarget={document.body}
+        options={[
+          { value: 'chocolate', label: 'Chocolate' },
+          { value: 'strawberry', label: 'Strawberry' },
+          { value: 'vanilla', label: 'Vanilla' },
+        ]}
+      />
+        <Select
+            menuPortalTarget={document.body}
+            menuPosition="fixed"
+            options={[
+              { value: 'chocolate', label: 'Chocolate' },
+              { value: 'strawberry', label: 'Strawberry' },
+              { value: 'vanilla', label: 'Vanilla' },
+            ]}
+          />
         </div>
     </div>
   )

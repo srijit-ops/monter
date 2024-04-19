@@ -72,7 +72,7 @@ function AllReports({data}) {
             </button>
         </div>
         <TableComponent finalData={finalData}/>
-        <div className='flex justify-between items-center mt-8 flex-wrap'>
+        <div className='flex justify-between items-center mt-6 flex-wrap pt-6 border-t border-gray-100'>
       <div className='md:w-3/5 w-full'>
       <Pagination
         currentPage={currentPage}

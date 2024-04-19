@@ -29,7 +29,7 @@ function TableComponent({finalData}) {
     <div>
         <table className='w-full border-collapse'>
         <thead className='bg-[#f5f5f5]'>
-          <tr className=' pl-4 py-2'>
+          <tr className=' pl-4 py-2 text-gray-600'>
             <th>Date</th>
             <th>Report Name</th>
             <th className='text-center'>Download</th>
@@ -39,11 +39,13 @@ function TableComponent({finalData}) {
           {finalData.map((item,index) => {
             const {date, time}= formatDate(item.createdAt)
             return (
-              <tr key={index}>
+              <tr key={index} className='pt-3 border-t border-gray-200'>
                 <td>
                     {date}
                     <br/>
+                    <span className='text-gray-500 text-sm'>
                     {time}
+                    </span>
                     </td>
                 <td>{item.reportName}</td>
                 <td className='cursor-pointer flex justify-center'>

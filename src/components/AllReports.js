@@ -87,13 +87,9 @@ function AllReports({ data }) {
             Rows per page
           </p>
           <Select
-            styles={{
-              menuPortal: (provided) => ({ ...provided, zIndex: 9999 }),
-              menu: (provided) => ({
-                ...provided,
-                zIndex: 9999,
-              }),
-            }}
+            styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
+            menuPlacement="auto"
+            maxMenuHeight={100}
             menuPortalTarget={document.body}
             defaultValue={selectedOption}
             onChange={setSelectedOption}

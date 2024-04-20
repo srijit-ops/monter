@@ -63,8 +63,7 @@ function AllReports({ data }) {
         <p className="sm:text-center text-start font-semibold tracking-wider md:text-lg text-sm text-black w-fit">
           Recently generated reports
         </p>
-        <button
-          className="text-black  w-1/12">
+        <button className="text-black  w-1/12">
           <Image
             src={"/filter.png"}
             alt={"filter"}
@@ -88,6 +87,14 @@ function AllReports({ data }) {
             Rows per page
           </p>
           <Select
+            styles={{
+              menuPortal: (provided) => ({ ...provided, zIndex: 9999 }),
+              menu: (provided) => ({
+                ...provided,
+                zIndex: 9999,
+              }),
+            }}
+            menuPortalTarget={document.body}
             defaultValue={selectedOption}
             onChange={setSelectedOption}
             options={rowOptions}

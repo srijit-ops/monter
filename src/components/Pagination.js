@@ -37,7 +37,7 @@ function Pagination({
             ? "text-gray-400 cursor-default"
             : "text-black cursor-pointer"
         }`}
-        onClick={onPrev}
+        onClick={currentPage === 1 ? null : onPrev}
       >
         <div className="flex justify-center items-center md:gap-3 gap-2">
           <Image
@@ -72,7 +72,7 @@ function Pagination({
         );
       })}
       <li
-        onClick={onNext}
+        onClick={currentPage === lastPage ? null : onNext}
         className={`${
           currentPage === lastPage
             ? "text-gray-400 cursor-default"

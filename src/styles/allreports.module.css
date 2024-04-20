@@ -13,3 +13,17 @@
     position: relative !important;
     height: unset !important;
   }
+
+  @media (max-width: 650px) {
+    .img {
+      width: 70% !important;
+    }
+    .download{
+      width: 20px !important;
+    }
+  }
+  @media (max-width: 415px) {
+    .img {
+      width: 85% !important;
+    }
+  }

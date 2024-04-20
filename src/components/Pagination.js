@@ -1,66 +1,70 @@
 import React from "react";
-import { usePagination, DOTS } from "../hooks/usePagination.hooks";
-import Styles from "../styles/pagination.module.css"
 import Image from "next/image";
+import { usePagination, dots } from "../hooks/usePagination.hooks";
+import Styles from "../styles/pagination.module.css";
 
-const Pagination = ({onPageChange,
-  // totalCount,
-  totalPageCount,
+function Pagination({
+  onPageChange,
+  totalPageAmount,
   currentPage,
-  pageSize
-}) => {
-
-
-  const paginationRange = usePagination({
+  DataCountPerPage,
+}) {
+  const paginationButtonsArray = usePagination({
     currentPage,
-    totalPageCount,
-    // totalCount,
-    pageSize
+    totalPageAmount,
+    DataCountPerPage,
   });
-
-  if (paginationRange.length < 2) {
-    return null;
-  }
 
   const onNext = () => {
     onPageChange(currentPage + 1);
   };
 
-  const onPrevious = () => {
+  const onPrev = () => {
     onPageChange(currentPage - 1);
   };
 
-  let lastPage = totalPageCount;
+  let lastPage = totalPageAmount;
+
+  if (paginationButtonsArray.length < 2) {
+    return null;
+  }
+
   return (
-    <ul
-      className="flex justify-between items-center gap-3"
-    >
+    <ul className="flex justify-between items-center md:gap-3 gap-2">
       <li
-        className={`${currentPage===1?"text-gray-400 cursor-default":"text-black cursor-pointer"}`}
-        onClick={onPrevious}
+        className={`${
+          currentPage === 1
+            ? "text-gray-400 cursor-default"
+            : "text-black cursor-pointer"
+        }`}
+        onClick={onPrev}
       >
-        <div className="flex justify-center items-center gap-3">
-          
+        <div className="flex justify-center items-center md:gap-3 gap-2">
           <Image
             src={"/back.png"}
-            alt={"filter"}
+            alt={"arrow"}
             layout="fill"
-            // height={230}
-            // width={238}
-            className={`object-contain ${Styles.img}`}/>
-            <p className="text-[0.9rem]">Prev</p>
-          </div>
-
+            className={`object-contain ${Styles.img}`}
+          />
+          <p className="md:text-[0.9rem] text-[0.7rem]">Prev</p>
+        </div>
       </li>
-      {paginationRange.map((pageNumber, index) => {
-        if (pageNumber === DOTS) {
-          return <li className="font-semibold text-lg text-gray-800 " key={index}>&#8230;</li>;
+      {paginationButtonsArray.map((pageNumber, index) => {
+        if (pageNumber === dots) {
+          return (
+            <li className="font-semibold text-lg text-gray-800" key={index}>
+              &#8230;
+            </li>
+          );
         }
-
         return (
           <li
-          key={index}
-            className={`cursor-pointer px-3 py-2 rounded-md border border-gray-400  text-center text-[0.9rem] font-semibold  ${pageNumber===currentPage?"bg-[#f4511e] text-white":"text-gray-500 bg-white"}`}
+            key={index}
+            className={`cursor-pointer md:px-3 md:py-2 py-1 px-2 rounded-md border border-gray-400  text-center md:text-[0.9rem] text-[0.7rem] font-semibold  ${
+              pageNumber === currentPage
+                ? "bg-[#f4511e] text-white"
+                : "text-gray-500 bg-white"
+            }`}
             onClick={() => onPageChange(pageNumber)}
           >
             {pageNumber}
@@ -69,21 +73,24 @@ const Pagination = ({onPageChange,
       })}
       <li
         onClick={onNext}
-        className={`${currentPage===lastPage?"text-gray-400 cursor-default":"text-black cursor-pointer"}`}
+        className={`${
+          currentPage === lastPage
+            ? "text-gray-400 cursor-default"
+            : "text-black cursor-pointer"
+        }`}
       >
-        <div className="flex justify-center items-center gap-3">
-          <p className="text-[0.9rem]">Next</p>
+        <div className="flex justify-center items-center md:gap-3 gap-2">
+          <p className="md:text-[0.9rem] text-[0.7rem]">Next</p>
           <Image
             src={"/back.png"}
-            alt={"filter"}
+            alt={"arrow"}
             layout="fill"
-            // height={230}
-            // width={238}
-            className={`object-contain rotate-180 ${Styles.img}`}/>
-          </div>
+            className={`object-contain rotate-180 ${Styles.img}`}
+          />
+        </div>
       </li>
     </ul>
   );
-};
+}
 
 export default Pagination;

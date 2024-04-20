@@ -1,69 +1,50 @@
-import { useMemo } from 'react';
+import { useMemo } from "react";
+import { range } from "@/utils/functions";
 
-export const DOTS = '...';
-
-function range(start, end) {
-  const result = [];
-  for (let i = start; i <= end; i++) {
-    result.push(i);
-  }
-  return result;
-}
-
+export const dots = "...";
 
 export const usePagination = ({
-  totalPageCount,
-  // totalCount,
-  pageSize,
-  currentPage
+  totalPageAmount,
+  DataCountPerPage,
+  currentPage,
 }) => {
   const paginationRange = useMemo(() => {
-  
-   
+    // total pages count is  firstPage + lastPage + currentPage + 1 DOT + 2left and right pages for the current page
+    const totalPageCount = 6; //if i want to shpw 1 pagenumber in each side of current page the it becomes total of 2 pagenumber buttons
 
-    // total pages count is  firstPage + lastPage + currentPage + 2*DOTS + 2left and right pages for the current page
-    const totalPageNumbers = 7; //if i want to shpw 1 pagenumber in each side of current page the it becomes total of 2 paenumber buttons
-
-   
-    if (totalPageNumbers >= totalPageCount) {  //suppose we want to show 7 page number buttons always, but there are only 5 pages, so we'll show them without any dots, just simple [1,2,3,4,5]
-      return range(1, totalPageCount);
+    if (totalPageCount >= totalPageAmount) {
+      //suppose we want to show 6 page number buttons always, but there are only 5 pages, so we'll show them without any dots, just simple [1,2,3,4,5]
+      return range(1, totalPageAmount);
     }
 
-    const leftSiblingIndex = currentPage - 2;
-    const rightSiblingIndex = currentPage;
+    const leftAdjacentPageIndex = currentPage - 2;
+    const rightAdjacentPageIndex = currentPage;
 
-    /*
-      We do not want to show dots if there is only one position left 
-      after/before the left/right page count as that would lead to a change if our Pagination
-      component size which we do not want
-    */
-    const shouldShowLeftDots = leftSiblingIndex > 2;
-    const shouldShowRightDots = rightSiblingIndex < totalPageCount - 2;
+    const showLeftDots = leftAdjacentPageIndex > 2;
+    const showRightDots = rightAdjacentPageIndex < totalPageAmount - 2;
 
     const firstPageNumber = 1;
-    const lastPageNumber = totalPageCount;
+    const lastPageNumber = totalPageAmount;
 
-    if (!shouldShowLeftDots && shouldShowRightDots) {
-    
-      let leftRange = range(1, 4);  //i want to show 4 pagenumbers just before the left side of right dots,[1,2,3,4,...,10]
-
-      return [...leftRange, DOTS, totalPageCount];
+    if (!showLeftDots && showRightDots) {
+      let leftRange = range(1, 4); //i want to show 4 pagenumbers just before the left side of right dots,[1,2,3,4,...,10]
+      return [...leftRange, dots, totalPageAmount];
     }
 
-    if (shouldShowLeftDots && !shouldShowRightDots) {
-
-      let rightRange = range(  //i want to show 4 pagenumbers just before the right side of left dots,[1,...7,8,9,10]
-        totalPageCount -3,
-        totalPageCount
+    if (showLeftDots && !showRightDots) {
+      let rightRange = range(
+        //i want to show 4 pagenumbers just before the right side of left dots,[1,...7,8,9,10]
+        totalPageAmount - 3,
+        totalPageAmount
       );
-      return [firstPageNumber, DOTS, ...rightRange];
+      return [firstPageNumber, dots, ...rightRange];
     }
 
-    if (shouldShowLeftDots && shouldShowRightDots) {
-      let middleRange = range(leftSiblingIndex, rightSiblingIndex);
-      return [firstPageNumber, DOTS, ...middleRange, DOTS, lastPageNumber];
+    if (showLeftDots && showRightDots) {
+      let middleRange = range(leftAdjacentPageIndex, rightAdjacentPageIndex);
+      return [firstPageNumber, dots, ...middleRange, dots, lastPageNumber];
     }
-  }, [totalPageCount, currentPage, pageSize]);
+  }, [totalPageAmount, currentPage, DataCountPerPage]);
 
   return paginationRange;
 };
